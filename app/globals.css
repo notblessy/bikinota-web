@@ -208,7 +208,7 @@ html {
   
   /* Keep table outer border */
   #invoice-content table {
-    border: 1px solid #d1d5db !important;
+    border: 1px solid #e5e7eb !important;
   }
   
   /* Keep table borders */

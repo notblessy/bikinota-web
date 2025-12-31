@@ -312,7 +312,11 @@ export default function CompanySettingsPage() {
           <div className="mb-8">
             <div className="mb-6">
               <Link href="/dashboard">
-                <Button variant="ghost" size="sm" className="mb-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="border border-gray-200 hover:border-gray-300"
+                >
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Back to Dashboard
                 </Button>

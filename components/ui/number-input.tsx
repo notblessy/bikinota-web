@@ -10,7 +10,11 @@ export interface NumberInputProps
 }
 
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
-  ({ className, value, onValueChange, ...props }, ref) => {
+  ({ className, value, onValueChange, thousandSeparator, decimalSeparator, ...props }, ref) => {
+    // Set default decimal separator to comma if thousand separator is dot (Indonesian format)
+    // This prevents the error: "Decimal separator can't be same as thousand separator"
+    const finalDecimalSeparator = decimalSeparator ?? (thousandSeparator === "." ? "," : ".");
+    
     return (
       <NumericFormat
         {...props}
@@ -20,6 +24,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           const numValue = values.floatValue;
           onValueChange?.(numValue);
         }}
+        thousandSeparator={thousandSeparator}
+        decimalSeparator={finalDecimalSeparator}
         className={cn(
           "flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
           className

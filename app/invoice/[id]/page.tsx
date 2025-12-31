@@ -114,7 +114,7 @@ export default function InvoiceViewPage() {
         
         /* Keep table outer border */
         #invoice-content table {
-          border: 1px solid #d1d5db !important;
+          border: 1px solid #e5e7eb !important;
         }
         
         /* Keep table borders */
@@ -419,7 +419,7 @@ export default function InvoiceViewPage() {
                 {/* Invoice Items */}
                 <div className="mb-8">
                   <div className="overflow-x-auto">
-                    <table className="w-full border border-gray-300">
+                    <table className="w-full border border-gray-200">
                       <thead>
                         <tr className="border-b bg-gray-100">
                           <th className="text-left py-3 px-2">Item</th>
