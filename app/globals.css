@@ -1,0 +1,340 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 347 77% 50%;
+    --primary-foreground: 355 100% 97%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 347 77% 50%;
+    --radius: 0.125rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 347 77% 50%;
+    --primary-foreground: 355 100% 97%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 347 77% 50%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-size: 14px; /* Reduced from default 16px */
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 0.875rem; /* 14px base font size */
+  }
+}
+
+/* Enhanced gradient utilities */
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 bg-clip-text text-transparent;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-r from-rose-500 to-pink-600;
+  }
+
+  .gradient-bg-hover {
+    @apply hover:bg-gradient-to-r hover:from-rose-600 hover:to-pink-700;
+  }
+
+  .gradient-border {
+    @apply border-2 border-transparent bg-gradient-to-r from-rose-500 to-pink-600 bg-clip-border;
+  }
+}
+
+/* Custom animations and effects */
+@layer components {
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-xl;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
+  }
+
+  .logo-gradient {
+    @apply bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 bg-clip-text text-transparent font-bold;
+  }
+
+  .page-gradient {
+    @apply bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 min-h-screen;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced custom scrollbar with gradient */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-rose-50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-rose-400 to-pink-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gradient-to-b from-rose-500 to-pink-600;
+}
+
+/* Gradient animations */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Button hover effects */
+.btn-gradient:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Card enhancements */
+.enhanced-card {
+  @apply bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-300;
+}
+
+.enhanced-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Print styles for invoices */
+@page {
+  margin: 0;
+  size: A4;
+}
+
+@media print {
+  /* Remove browser default header/footer */
+  @page {
+    margin: 0;
+    size: A4;
+  }
+
+  /* Hide everything except invoice content */
+  body * {
+    visibility: hidden;
+  }
+
+  #invoice-content,
+  #invoice-content * {
+    visibility: visible;
+  }
+
+  #invoice-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    page-break-after: avoid;
+  }
+
+  /* Remove only outer card border */
+  #invoice-content > div > [class*="Card"] {
+    border: none !important;
+    border-width: 0 !important;
+  }
+  
+  /* Keep table outer border */
+  #invoice-content table {
+    border: 1px solid #d1d5db !important;
+  }
+  
+  /* Keep table borders */
+  #invoice-content table tr.border-b,
+  #invoice-content table tr[class*="border-b"] {
+    border-bottom: 1px solid #e5e7eb !important;
+  }
+  
+  /* Keep table header grey background - force print */
+  #invoice-content table thead tr,
+  #invoice-content table thead tr[class*="bg-gray"],
+  #invoice-content table thead tr.bg-gray-100 {
+    background-color: #f3f4f6 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  
+  /* Force background colors to print */
+  #invoice-content [class*="bg-gray-50"],
+  #invoice-content [class*="bg-gray-100"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  
+  /* Keep separator/dividers */
+  #invoice-content [role="separator"],
+  #invoice-content hr,
+  #invoice-content [class*="Separator"] {
+    border-top: 1px solid #e5e7eb !important;
+    border-bottom: none !important;
+  }
+  
+  /* Ensure padding is preserved */
+  #invoice-content [class*="CardContent"] {
+    padding: 3rem !important;
+  }
+  
+  /* Force grid to display side by side in print */
+  #invoice-content .grid {
+    display: grid !important;
+    gap: 3rem !important;
+    column-gap: 3rem !important;
+    row-gap: 3rem !important;
+  }
+  
+  /* Ensure specific spacing for invoice details and payment sections */
+  #invoice-content .grid.gap-12,
+  #invoice-content [class*="grid"][class*="gap-12"],
+  #invoice-content [class*="grid-cols-2"] {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 3rem !important;
+    column-gap: 3rem !important;
+    row-gap: 3rem !important;
+  }
+  
+  /* Ensure grid columns don't stack in print */
+  #invoice-content .grid > div {
+    display: block !important;
+  }
+  
+  /* Add explicit padding to grid children for print to ensure spacing */
+  #invoice-content .grid > div:first-child {
+    padding-right: 1.5rem !important;
+  }
+  
+  #invoice-content .grid > div:last-child {
+    padding-left: 1.5rem !important;
+  }
+  
+  /* For 2-column grids, add spacing between columns */
+  #invoice-content .grid.grid-cols-2 > div:first-child,
+  #invoice-content .grid[class*="grid-cols-2"] > div:first-child {
+    padding-right: 1.5rem !important;
+  }
+  
+  #invoice-content .grid.grid-cols-2 > div:last-child,
+  #invoice-content .grid[class*="grid-cols-2"] > div:last-child {
+    padding-left: 1.5rem !important;
+  }
+  
+  /* Preserve margin bottom for spacing */
+  #invoice-content .mb-8 {
+    margin-bottom: 2rem !important;
+  }
+
+  /* Remove all shadows */
+  #invoice-content *,
+  #invoice-content [class*="shadow"] {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+  }
+
+  /* Remove rounded corners */
+  #invoice-content *,
+  #invoice-content [class*="rounded"] {
+    border-radius: 0 !important;
+  }
+
+  /* Remove background colors except white */
+  #invoice-content [class*="bg-gray"],
+  #invoice-content [class*="bg-rose"],
+  #invoice-content [class*="bg-pink"],
+  #invoice-content [class*="backdrop"] {
+    background: white !important;
+    background-color: white !important;
+  }
+
+  /* Ensure clean white background */
+  #invoice-content {
+    background: white !important;
+    background-color: white !important;
+  }
+
+  /* Ensure text is readable */
+  #invoice-content {
+    color: black !important;
+  }
+
+  /* Hide navigation and buttons */
+  nav,
+  button,
+  .navbar,
+  [class*="navbar"] {
+    display: none !important;
+  }
+}
