@@ -29,6 +29,7 @@ export default function NewInvoicePage() {
   const [dueDate, setDueDate] = useState("")
   const [taxRate, setTaxRate] = useState(0)
   const [status, setStatus] = useState<"draft" | "sent" | "paid">("draft")
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [items, setItems] = useState<InvoiceItem[]>([
     { id: crypto.randomUUID(), name: "", description: "", quantity: 1, price: 0 },
   ])
@@ -59,7 +60,7 @@ export default function NewInvoicePage() {
     return calculateSubtotal() + calculateTax()
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!canCreateInvoice) {
