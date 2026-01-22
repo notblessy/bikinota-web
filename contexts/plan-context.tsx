@@ -27,29 +27,50 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth()
 
   // Fetch plan from backend
-  useEffect(() => {
-    const fetchPlan = async () => {
-      if (!user) {
-        setIsLoading(false)
-        return
-      }
-
-      try {
-        const response = await api.get<PlanResponse>("/api/plan")
-        if (response.success && response.data) {
-          setCurrentPlan(response.data.current_plan)
-        }
-      } catch (error) {
-        console.error("Error fetching plan:", error)
-        // If error, default to free plan
-        setCurrentPlan("free")
-      } finally {
-        setIsLoading(false)
-      }
+  const fetchPlan = async () => {
+    if (!user) {
+      setIsLoading(false)
+      return
     }
 
+    try {
+      const response = await api.get<PlanResponse>("/api/plan")
+      if (response.success && response.data) {
+        setCurrentPlan(response.data.current_plan)
+      }
+    } catch (error) {
+      console.error("Error fetching plan:", error)
+      // If error, default to free plan
+      setCurrentPlan("free")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
     fetchPlan()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
+
+  // Refresh plan periodically when on payment success page
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.pathname === "/payment/success") {
+      // Refresh plan every 2 seconds for up to 30 seconds
+      const interval = setInterval(() => {
+        fetchPlan()
+      }, 2000)
+
+      const timeout = setTimeout(() => {
+        clearInterval(interval)
+      }, 30000)
+
+      return () => {
+        clearInterval(interval)
+        clearTimeout(timeout)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const getInvoicesThisMonth = () => {
     const now = new Date()

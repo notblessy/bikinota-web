@@ -8,6 +8,7 @@ import ProtectedRoute from "@/components/protected-route"
 import Navbar from "@/components/navbar"
 import { usePlan } from "@/contexts/plan-context"
 import { useToast } from "@/hooks/use-toast"
+import { api } from "@/lib/api"
 import { Check, Crown, Zap } from "lucide-react"
 
 export default function BillingPage() {
@@ -16,23 +17,43 @@ export default function BillingPage() {
   const [isUpgrading, setIsUpgrading] = useState(false)
 
   const handleUpgrade = async (plan: "free" | "unlimited") => {
+    // For downgrading to free, we can do it directly
+    if (plan === "free") {
+      setIsUpgrading(true)
+      try {
+        await upgradeToPlan(plan)
+        toast({
+          title: "Downgraded to free plan",
+          description: "You are now on the free plan with 3 invoices per month.",
+        })
+      } catch (error: any) {
+        toast({
+          title: "Failed to update plan",
+          description: error?.message || "An error occurred while updating your plan. Please try again.",
+          variant: "destructive",
+        })
+      } finally {
+        setIsUpgrading(false)
+      }
+      return
+    }
+
+    // For upgrading to unlimited, redirect to Polar checkout
     setIsUpgrading(true)
     try {
-      await upgradeToPlan(plan)
-      toast({
-        title: plan === "unlimited" ? "Upgraded successfully!" : "Downgraded to free plan",
-        description:
-          plan === "unlimited"
-            ? "You now have unlimited access to all features."
-            : "You are now on the free plan with 3 invoices per month.",
-      })
+      const response = await api.get<string>("/api/payment/checkout-link")
+      if (response.success && response.data) {
+        // Redirect to Polar checkout
+        window.location.href = response.data
+      } else {
+        throw new Error("Failed to create checkout link")
+      }
     } catch (error: any) {
-      toast({
-        title: "Failed to update plan",
-        description: error?.message || "An error occurred while updating your plan. Please try again.",
+    toast({
+        title: "Failed to start checkout",
+        description: error?.message || "An error occurred while starting checkout. Please try again.",
         variant: "destructive",
       })
-    } finally {
       setIsUpgrading(false)
     }
   }
@@ -198,23 +219,24 @@ export default function BillingPage() {
           <Card className="mt-8">
             <CardHeader>
               <CardTitle>Billing Information</CardTitle>
-              <CardDescription>Mock billing system - no real payments processed</CardDescription>
+              <CardDescription>Manage your subscription and payment details</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-medium text-blue-900 mb-2">Demo Mode</h4>
-                  <p className="text-blue-800 text-sm">
-                    This is a mock billing system for demonstration purposes. No real payments are processed. You can
-                    freely switch between plans to test the functionality.
-                  </p>
-                </div>
-
                 {currentPlan === "unlimited" && (
                   <div className="p-4 bg-green-50 rounded-lg">
                     <h4 className="font-medium text-green-900 mb-2">Active Subscription</h4>
                     <p className="text-green-800 text-sm">
                       Your unlimited plan is active. You have access to all premium features.
+                    </p>
+                  </div>
+                )}
+
+                {currentPlan === "free" && (
+                  <div className="p-4 bg-blue-50 rounded-lg">
+                    <h4 className="font-medium text-blue-900 mb-2">Upgrade to Unlimited</h4>
+                    <p className="text-blue-800 text-sm">
+                      Click "Upgrade Now" to start your unlimited subscription. You'll be redirected to a secure payment page.
                     </p>
                   </div>
                 )}
