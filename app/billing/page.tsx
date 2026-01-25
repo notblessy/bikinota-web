@@ -100,7 +100,7 @@ export default function BillingPage() {
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold">
-                    {currentPlan === "unlimited" ? "Rp 250.000" : "Rp 0"}
+                    {currentPlan === "unlimited" ? "$25" : "$0"}
                     <span className="text-sm font-normal text-gray-600">/month</span>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ export default function BillingPage() {
                 <CardTitle className="text-2xl">Free</CardTitle>
                 <CardDescription>Perfect for getting started</CardDescription>
                 <div className="text-3xl font-bold">
-                  Rp 0<span className="text-lg font-normal text-gray-600">/month</span>
+                  $0<span className="text-lg font-normal text-gray-600">/month</span>
                 </div>
               </CardHeader>
               <CardContent>
@@ -171,7 +171,7 @@ export default function BillingPage() {
                 </CardTitle>
                 <CardDescription>For growing businesses</CardDescription>
                 <div className="text-3xl font-bold">
-                  Rp 250.000<span className="text-lg font-normal text-gray-600">/month</span>
+                  $25<span className="text-lg font-normal text-gray-600">/month</span>
                 </div>
               </CardHeader>
               <CardContent>

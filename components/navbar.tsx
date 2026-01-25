@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +15,6 @@ import {
 import { useAuth } from "@/contexts/auth-context";
 import { usePlan } from "@/contexts/plan-context";
 import {
-  FileText,
   User,
   LogOut,
   CreditCard,
@@ -37,7 +37,15 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/dashboard" className="flex items-center">
-            <FileText className="h-8 w-8 text-rose-600" />
+            <div className="bg-white rounded-xl border border-primary p-2">
+              <Image
+                src="/logo.png"
+                alt="Bikinota Logo"
+                width={32}
+                height={32}
+                className="h-6 w-6"
+              />
+            </div>
             <span className="ml-2 text-xl font-bold bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 bg-clip-text text-transparent">
               bikinota
             </span>

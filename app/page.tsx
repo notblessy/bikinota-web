@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Check, FileText, Download, Users } from "lucide-react"
@@ -11,7 +12,15 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <FileText className="h-8 w-8 text-rose-600" />
+              <div className="bg-white rounded-xl border border-primary p-2">
+                <Image
+                  src="/logo.png"
+                  alt="Bikinota Logo"
+                  width={32}
+                  height={32}
+                  className="h-6 w-6"
+                />
+              </div>
               <span className="ml-2 text-xl font-bold bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 bg-clip-text text-transparent">
                 Bikinota
               </span>
@@ -124,7 +133,7 @@ export default function LandingPage() {
                 <CardTitle className="text-2xl">Free</CardTitle>
                 <CardDescription>Perfect for getting started</CardDescription>
                 <div className="text-3xl font-bold">
-                  Rp 0<span className="text-lg font-normal text-gray-600">/month</span>
+                  $0<span className="text-lg font-normal text-gray-600">/month</span>
                 </div>
               </CardHeader>
               <CardContent>
@@ -161,7 +170,7 @@ export default function LandingPage() {
                 <CardTitle className="text-2xl">Unlimited</CardTitle>
                 <CardDescription>For growing businesses</CardDescription>
                 <div className="text-3xl font-bold">
-                  Rp 250.000<span className="text-lg font-normal text-gray-600">/month</span>
+                  $25<span className="text-lg font-normal text-gray-600">/month</span>
                 </div>
               </CardHeader>
               <CardContent>
@@ -216,7 +225,15 @@ export default function LandingPage() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center">
-            <FileText className="h-8 w-8 text-blue-400" />
+            <div className="bg-white rounded-xl border border-primary p-2">
+              <Image
+                src="/logo.png"
+                alt="Bikinota Logo"
+                width={32}
+                height={32}
+                className="h-6 w-6"
+              />
+            </div>
             <span className="ml-2 text-xl font-bold">Bikinota</span>
           </div>
           <p className="text-center text-gray-400 mt-4">© 2024 Bikinota. All rights reserved.</p>

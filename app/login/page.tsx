@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -20,7 +21,6 @@ import {
 } from "@/components/ui/form"
 import { useAuth } from "@/contexts/auth-context"
 import { useToast } from "@/hooks/use-toast"
-import { FileText } from "lucide-react"
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -66,7 +66,15 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center">
-            <FileText className="h-8 w-8 text-rose-600" />
+            <div className="bg-white rounded-xl border border-primary p-2">
+              <Image
+                src="/logo.png"
+                alt="Bikinota Logo"
+                width={32}
+                height={32}
+                className="h-6 w-6"
+              />
+            </div>
             <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 bg-clip-text text-transparent">
               Bikinota
             </span>
